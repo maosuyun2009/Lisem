@@ -1,4 +1,4 @@
 [submodule "qemu"]
 	path = qemu
-	url = https://github.com/LISTENAI/qemu.git
-	branch = listenai
+	url = https://github.com/maosuyun2009/qemu.git
+	branch = fix/venusa-firmware-boot

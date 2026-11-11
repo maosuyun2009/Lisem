@@ -31,8 +31,8 @@
 - `python/`：随原生应用交付的同步 Python SDK，经版本化原生管理及 worker RPC 控制；
   固件业务判据放在示例或测试工程，不进入通用 SDK。产品本身不依赖 Python。
 - `desktop/`：Rust + GPUI Kit 界面，通过原生管理协议共用核心。
-- `qemu/`：`LISTENAI/qemu` 的 `listenai` 分支 submodule，锁定具体提交。
-  CPU、芯片、板型及独立器件模型直接在该仓库维护；先提交并推送 QEMU，
+- `qemu/`：远端与跟踪分支以 `.gitmodules` 为准，submodule 锁定具体提交。
+  CPU、芯片、板型及独立器件模型在对应 QEMU fork 维护；先提交并推送 QEMU，
   再更新本仓库指针。不得仅修改生成目录，也不得引用未推送的提交。
 - `assets/`：随产品交付的固定 ROM 和 LUNA 二进制及校验清单。
 - `native/`：宿主音频和网络；`tools/`：Python 3.10+ 构建与芯片验证工具。

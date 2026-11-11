@@ -15,6 +15,10 @@ _start:
     csrw 0x7cb, t0
     li t0, 6
     csrw 0x7cc, t0
+    /* FlushPipeCCM: coherent accesses have no pending cache pipeline. */
+    csrwi 0x4cf, 1
+    csrr t0, 0x4cf
+    bnez t0, fail
     li a0, 0x600d
     ebreak
 fail:

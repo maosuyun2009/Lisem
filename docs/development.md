@@ -12,7 +12,7 @@
 git submodule update --init qemu
 ```
 
-QEMU 修改提交到 `LISTENAI/qemu` 的 `listenai` 分支，再更新本仓库指针。
+QEMU 修改先提交并推送到 `.gitmodules` 指定的仓库和分支，再更新本仓库指针。
 构建直接使用 `qemu/`，不需要递归初始化上游的固件 ROM 子模块。
 
 ## 入口
