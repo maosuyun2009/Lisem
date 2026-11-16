@@ -274,7 +274,7 @@ def venusa_camera(subsample=False):
             m.write(bus + 0x28, 1); m.command('clock_step 1000000')
             assert m.read(bus + 0x18) & 0x600 == 0x600
         reg(0xf2,0); reg(0x44,6); reg(0x46,2)
-        size = 8 if subsample else 4
+        size = 4  # Crop dimensions are output pixels, including subsampling mode.
         for address, value in [(0x50,1),(0x55,0),(0x56,size),(0x57,0),(0x58,size)]: reg(address,value)
         if subsample: reg(0x59,0x22); reg(0x5a,0x33)
         m.camera_frame(bytes([0,255,0]) * (640*480))

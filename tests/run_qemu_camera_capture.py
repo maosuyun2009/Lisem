@@ -277,8 +277,9 @@ def subsampling(mode):
     m = Machine(OUTPUT / ('subsample-%02x' % mode))
     try:
         configure(m)
-        transfer(m, [0x50, 1, 0, 2, 0, 4])
-        transfer(m, [0x55, 0, 4, 0, 16])
+        # Crop is after 2x subsampling: output origin (2,1), size 8x2.
+        transfer(m, [0x50, 1, 0, 1, 0, 2])
+        transfer(m, [0x55, 0, 2, 0, 8])
         transfer(m, [0x59, 0x22, mode])
         if mode != 0x33:
             transfer(m, [0x5b, 0, 0, 0, 0])
@@ -325,7 +326,7 @@ def integer_subsampling_timing():
             transfer(m, [0x05, 0, 0])  # No horizontal blanking.
             transfer(m, [0x0f, 0, 16, 0])  # 20 sensor clocks per line at 2 MCLK each.
             transfer(m, [0x50, 1])
-            transfer(m, [0x55, 0, 4, 0, 16])
+            transfer(m, [0x55, 0, 2, 0, 8])
             transfer(m, [0x59, 0x22, mode])
             transfer(m, [0x5b, 0, 0, 0, 0])
             transfer(m, [0x5f, 0, 0, 0, 0])

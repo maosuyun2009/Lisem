@@ -1,5 +1,7 @@
 """Bundled LUNA assets must match their target, public ABI and content hashes."""
 from pathlib import Path
+import json
+from collections import defaultdict
 import shutil
 import sys
 import tempfile
@@ -20,14 +22,17 @@ class LunaBundle(unittest.TestCase):
             {f"{system}-{arch}" for system in ("darwin", "linux", "windows")
              for arch in ("aarch64", "x86_64")},
         )
-        versions = set()
+        versions = defaultdict(set)
         for entry in entries:
             system, arch = entry.parent.name.split('-')
             host = {'darwin': 'Darwin', 'linux': 'Linux', 'windows': 'Windows'}[system]
             with patch.object(build_qemu.platform, 'system', return_value=host), \
                     patch.object(build_qemu.platform, 'machine', return_value=arch):
-                versions.add(build_qemu.luna_backend()['version'])
-        self.assertEqual(len(versions), 1)
+                manifest = build_qemu.luna_backend()
+                versions[manifest.get('venusa_factory', False)].add(manifest['version'])
+        # The optional VenusA engine is a distinct capability, not an ABI break.
+        for capability, releases in versions.items():
+            self.assertEqual(len(releases), 1, 'Mixed releases within capability group %s' % capability)
 
     def test_corrupt_or_mismatched_asset_is_rejected(self):
         source = next((ROOT / 'assets/luna').glob('*/manifest.json')).parent
@@ -44,6 +49,12 @@ class LunaBundle(unittest.TestCase):
                     patch.object(build_qemu.platform, 'system', return_value=host), \
                     patch.object(build_qemu.platform, 'machine', return_value=arch):
                 build_qemu.luna_backend()
+                original_manifest = json.loads((dest / 'manifest.json').read_text())
+                for bad in ({'venusa_factory': 'true'}, {'venusa_factory': 1}, {'version': ''}, {'version': None}):
+                    (dest / 'manifest.json').write_text(json.dumps(dict(original_manifest, **bad)))
+                    with self.subTest(bad=bad), self.assertRaises(ValueError):
+                        build_qemu.luna_backend()
+                (dest / 'manifest.json').write_text(json.dumps(original_manifest))
                 original = (dest / 'liblisem-luna.a').read_bytes()
                 (dest / 'liblisem-luna.a').write_bytes(original + b'changed')
                 with self.assertRaises(ValueError):

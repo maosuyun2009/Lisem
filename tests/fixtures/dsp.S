@@ -82,6 +82,19 @@ _start:
     li t3, 11
     bne t2, t3, fail
 
+    /* NMSIS ZUNPKD810/832: unsigned byte pairs used by JPEG MCU reorder. */
+    li t0, 0xfedcba98
+    .word (0xacc0007f | (6 << 7) | (5 << 15))
+    li t3, 0x00ba0098
+    bne t1, t3, fail
+    .word (0xad70007f | (5 << 7) | (5 << 15)) /* rd aliases source */
+    li t3, 0x00fe00dc
+    bne t0, t3, fail
+    .word (0xacc0007f | (6 << 7)) /* source x0 */
+    bnez t1, fail
+    .word (0xad70007f | (5 << 15)) /* destination x0 */
+    bnez zero, fail
+
     /* BKDR hash, as used by the unmodified algorithm resource parser. */
     li t0, 0
     li t1, 131

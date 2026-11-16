@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Run bounded QEMU regressions for VenusA and its shared controllers."""
 from qemu_qtest import run_tests
-TESTS = ('listenai-eclic-test', 'venusa-peripherals-test', 'venusa-gpadc-test',
+TESTS = ('listenai-eclic-test', 'venusa-peripherals-test', 'venusa-jpeg-test',
+         'venusa-scaler-test',
+         'listenai-musb-test', 'venusa-gpadc-test',
          'venusa-audio-test', 'listenai-dma-peripheral-test',
          'venusa-calendar-test', 'venusa-pwm-test', 'venusa-luna-test',
          'venusa-i2c-test', 'listenai-uart-dma-test', 'venusa-dvp-test',
-         'venusa-camera-test', 'venusa-image-test', 'venusa-touch-test')
+         'venusa-camera-test', 'venusa-image-test', 'venusa-touch-test',
+         'listenai-spi-source-test')
 
 
 def main():

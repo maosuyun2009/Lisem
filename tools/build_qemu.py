@@ -74,6 +74,9 @@ def luna_backend():
         raise ValueError('No bundled LUNA backend for ' + target)
     manifest = json.loads(manifest_path.read_text())
     archive = directory / 'liblisem-luna.a'
+    if (not isinstance(manifest.get('version'), str) or not manifest['version'].strip()
+            or type(manifest.get('venusa_factory', False)) is not bool):
+        raise ValueError('Invalid LUNA version or capability declaration')
     if (manifest.get('abi') != 1 or manifest.get('target') != target
             or manifest.get('file') != archive.name or not archive.is_file()
             or manifest.get('sha256') != sha256(archive)

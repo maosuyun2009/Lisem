@@ -34,6 +34,40 @@ QEMU 修改先提交并推送到 `.gitmodules` 指定的仓库和分支，再更
 背压与取消，并核对静态图片经 DVP FIFO/GPDMA 写入 RAM 的字节、内存边界、
 帧快照、SOF/EOF 中断及复位取消。共享输入另覆盖连续发布、代际隔离、SOF
 锁存、丢帧／重复计数和断开／重连。固件拍照还需通过原 LPK 的业务入口验证。
+
+无头外部输入测试可使用 QEMU 诊断源，不属于板型产品器件目录：
+
+- `listenai-video-source` 从完整 raw 帧驱动 `dvp-input` 的 VSYNC、HSYNC、PCLK 和
+  8 位数据。`bytes-per-pixel` 指定每像素字节数，支持显式同步极性与采样边沿。
+- `venusa-gc0328-camera` 的 `file` 是固定 640×480 RGB888 场景，`i2c-bus=0|1`
+  选择 SCCB 控制器，默认 1；`scl-pad`、`sda-pad` 选择已支持的引脚对。
+  I²C0 默认 19/20（另支持 46/47），I²C1 默认 34/33（另支持 32/33）。
+  必须由固件选择对应 PinMux；传感器配置仍由固件通过 I²C 完成。
+- `listenai-spi-source` 从 `LSPI0001` 文件驱动所选设备的 `pad-in`。文件头为
+  八字节 ASCII `LSPI0001`，之后每项为 LE32 非零长度及其原始字节，一项对应
+  一次 CS 事务；整文件最多 32 MiB，单事务最多 2 MiB。属性包括 `sink`、
+  `clock-pad`、`mosi-pad`、`cs-pad`、`file`、`clock-hz`、`mode`、`delay-ns`、
+  `gap-ns`、`period-ns`、`repeats`。支持 8 位 MSB-first、mode 0–3 和虚拟时钟
+  排程；协议分块、图像编码及业务验收由调用工程负责，不进入此模型。
+
+源计数只说明发出了信号；必须另核对控制器接收、FIFO/DMA 数据和原固件结果。
+VenusA 诊断报告提供 `dvp` 完整捕获/短行/短帧计数及 `spi` 字传输/溢出状态。
+`make qemu-venusa` 包含数字视频源和 SPI 回放的字节、IRQ、复位、门控与输入拒绝回归。
+
+VenusA ADC/DMIC 的功能输入边界是归一化 PCM 声场，不是模拟调制器或 PDM 引脚比特流。
+`LISEM_QEMU_AUDIO_INPUT` 提供 signed-16 little-endian PCM，`LISEM_QEMU_AUDIO_FORMAT`
+指定 `采样率,通道数`。已支持的 DMIC0 双边沿、latch-90 配置绕过模拟 PGA/参考电压，
+仍执行数字增益、静音和功能性 HPF，并按实际采样时钟进入 APC FIFO/DMA/IRQ。
+采样率/OSR 仅接受 SDK 的组合；其他 DMIC 源/边沿/自动复位模式、ALC 和噪声整形
+明确失败。此层级不宣称 PDM 串行时序、抽取滤波器或模拟噪声的位级精度。
+CMDMA 的外设接收支持递增目标的散写：间隔以传输宽度计，计数跨请求和暂停保持，
+每个 LLI 块重新开始；零计数、外设发送散写及外设源 gather 仍拒绝。
+
+DMA2D ch3 支持实际 DVP FIFO 的 RGB888→YUYV422，以及等尺寸、紧密行距的
+YUYV422 无转换采集；ch4 支持内存 YUYV422→BGR888。完成来自真实 FIFO/DMA
+进度，不由图像源直接置位。scaler 图像 ROI 可使用字节地址，普通字传输的对齐
+限制不因此放宽。字节结果、保护区、请求门控、取消和非法布局由 qtest 验证。
+
 `make qemu-wifi-wpa2 qemu-hsu` 验证 EAPOL 密钥确认、CCMP 独立向量、GTK
 广播 DHCP、MIC/PN 拒绝、取消和密钥替换边界。固件使用
 `python3 tests/run_wifi_wpa2_firmware.py --lpk firmware.lpk` 验证正确密码取得

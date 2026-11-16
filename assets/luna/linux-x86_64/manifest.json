@@ -1,8 +1,342 @@
 {
-  "version": "0.5.1",
+  "version": "0.6.0-dev-venusa",
   "abi": 1,
   "target": "linux-x86_64",
+  "venusa_factory": true,
   "file": "liblisem-luna.a",
-  "sha256": "52dcae007ebedc4dd025d216cf0b5cf4c719e8b25797d332737eb40ba00ee07b",
-  "api_sha256": "1ea08406a70e2906fa3da7c7a07bc8594c22b840176ad30a329dcaedb2522cea"
+  "sha256": "caf6045ea7e7fa8f67cf1ba5d336304dd890792055e029a52490f57f86ea86c9",
+  "api_sha256": "1ea08406a70e2906fa3da7c7a07bc8594c22b840176ad30a329dcaedb2522cea",
+  "compat_version": "0.5.1",
+  "kernels": [
+    {
+      "name": "luna_api_split_cnn",
+      "size": 1440,
+      "sha256": "45a1bcf0d25c90421fe88cae61c3cbd71f5079a68f91f85057cfdcfe918ff517",
+      "source": "modules/luna/cmd/luna_cnn_cmd.c"
+    },
+    {
+      "name": "luna_api_split_depthwise",
+      "size": 1332,
+      "sha256": "906799521be7fb50925d431e382b3a50cedee1086bbc2fd6b6aa9f1e4d2aa46e",
+      "source": "modules/luna/cmd/luna_cnn_cmd.c"
+    },
+    {
+      "name": "luna_api_split_pool",
+      "size": 1124,
+      "sha256": "982401dbb5ced16528c2d836d86c35d9979c3649b5fb5e3bb962fbe77c1924ed",
+      "source": "modules/luna/cmd/luna_cnn_cmd.c"
+    },
+    {
+      "name": "luna_api_split_deconv",
+      "size": 1328,
+      "sha256": "9a81440273f23379868d497577382fadacbee06e4b0e1d8a125c8d15e7d370f6",
+      "source": "modules/luna/cmd/luna_cnn_cmd.c"
+    },
+    {
+      "name": "luna_api_special_op_cmd",
+      "size": 2092,
+      "sha256": "04fa6697cad8a8b0ca4853310d261f6beb538f0e3f0eeae60b19607a6cacecf7",
+      "source": "modules/luna/cmd/luna_cnn_cmd.c"
+    },
+    {
+      "name": "luna_fft_cmd",
+      "size": 1464,
+      "sha256": "0ed5bd9c60cd8333da96abc11cb32668eadaab85c7bcbf2171c698d1f7ce590b",
+      "source": "modules/luna/cmd/luna_fft_cmd.c"
+    },
+    {
+      "name": "luna_matrix_mul_cmd",
+      "size": 1636,
+      "sha256": "5adadc39143ffad390a78a31a88c51216d74938bd864f23457710a5e495ad36e",
+      "source": "modules/luna/cmd/luna_matrix_cmd.c"
+    },
+    {
+      "name": "luna_matrix_transpose_cmd",
+      "size": 1456,
+      "sha256": "2da08ff806b67e8b12d399ed872a6042105f4627a2dfa13c7998007bafc5819f",
+      "source": "modules/luna/cmd/luna_matrix_cmd.c"
+    },
+    {
+      "name": "luna_matrix_transpose_3d_wch_cmd",
+      "size": 212,
+      "sha256": "b43f5519cd6ba15c17b6891cfca8bb901bd50f264849cb386cb28b0fb5654ef4",
+      "source": "modules/luna/cmd/luna_matrix_cmd.c"
+    },
+    {
+      "name": "luna_api_special_first123_op_cmd",
+      "size": 2176,
+      "sha256": "25eaf6cb4f1c4e33e65849eff2084a6f101c98e2dce6020595ceae5ad2d6fa3b",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_merge_seg1_lay0_lay16_op_cmd",
+      "size": 8396,
+      "sha256": "26390e18cc2d0d803027d9240d659edd56960b4154e5bb7f35030ceb239a0ebe",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_merge_seg2_lay0_lay4_op_cmd",
+      "size": 2812,
+      "sha256": "c5d3c201ff5b103ab9b90ef79e1fbff10ce213ee81fcfa0b6aa416f3558fb1d1",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_merge_seg2_lay45_lay52_cmd",
+      "size": 2948,
+      "sha256": "4f0fb8d692a6a5fae08eb912c6fa4ee5af71f89d97db8ef21fb284e2bdc8bca2",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_merge_seg2_lay53_lay54_cmd",
+      "size": 1020,
+      "sha256": "8350c8a31d466ee8e3914451ca170f443db88ba1bf94cd05fbc4912898c69ec1",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_merge_seg2_lay60_lay62_cmd",
+      "size": 2196,
+      "sha256": "5fd2bda6fb081ed47e1eac9fcacd8667ae72e62a43522377d389ea24be4bf28b",
+      "source": "modules/luna/cmd/luna_merge_cmd.c"
+    },
+    {
+      "name": "luna_api_memset",
+      "size": 116,
+      "sha256": "0cd6d8130036fa4d419c807f861d1c5df7580a039b2b9502dbe2cfb2e8662050",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_memcpy",
+      "size": 120,
+      "sha256": "b1188e0e3bc4598158326497a5b75fee90f7f421b04d289052f35c5f095a265a",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_activate",
+      "size": 1236,
+      "sha256": "75d07e50b5606604fda41103fd5983aa313d2e317c10f5818fcd792ce33d7554",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_exp",
+      "size": 900,
+      "sha256": "d800096042d7dbb753d2291506c252aef2d6e5bfd1500898d88fa5bc48aad177",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_psrammemcpy",
+      "size": 104,
+      "sha256": "aec2f9c1139b4831d6266894d5200ca5c1be00e9682c5ec1285310d7ecc57dd1",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_lut_new",
+      "size": 768,
+      "sha256": "a347cfccb74617b8b6e7c1fd30925c779aa9ed6006f6ba4b474842b7bc65554c",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_lut_act",
+      "size": 604,
+      "sha256": "0be8d87c2f42514ba96151c08e683c688ad2622aa73a1c97981ae14edb7e50c6",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_gpdma_start",
+      "size": 436,
+      "sha256": "1256ba3d0ba3777c5e9296304f69f7a970777fb6137f983763c853b45a553ef1",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_gpdma_wait",
+      "size": 68,
+      "sha256": "00b96ed8d7134499ecc48b6bbe543c305b52b97f6ab6038c3fb93a9afd8bab8d",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_crc32",
+      "size": 112,
+      "sha256": "dcdea5d83516ce3d720c27cd59af8fc3d2e7075adad5ebec826547c816eb0003",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_rgb_sub128",
+      "size": 420,
+      "sha256": "b5de91390e0dbe6f333354626a080c10c69df9afcc27aec26b6e512793c54737",
+      "source": "modules/luna/cmd/luna_misc_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_cmd",
+      "size": 1776,
+      "sha256": "3531a184e890bd2f9fe57065ed56d53226de5cd9c4060d9dddfb0f8cd050829d",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_cmp",
+      "size": 1080,
+      "sha256": "99b3fe907a8a36619b5e940fb154d4b39ae736cae7d19f037bee76e1011f9a9d",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_maxmin",
+      "size": 836,
+      "sha256": "aaab1efe4bb53c2eb8d5134a000bd0d99518c19ed31798b9b7d0ad8d6a62de7d",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_conj",
+      "size": 1156,
+      "sha256": "0420e69ee71805ac072eb95dcf6b6027089a8824db7084dd14e74ac333b03d49",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_sum",
+      "size": 744,
+      "sha256": "918f5af2ce6daa106a314db4c7df2c7b37df2cefebfaa63be75629532537c658",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_div",
+      "size": 1864,
+      "sha256": "c86b9703785316f1b9c43f6ae3ac0ad6bae6d307ef939c3d3e69368437b62a75",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vector_sqrt",
+      "size": 2368,
+      "sha256": "3da7dddb44590685c84f52cbe7957eb445ad3948993e1acd67121136d2f34f87",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vec_cplx_mul",
+      "size": 460,
+      "sha256": "75967e6048ebecb26b8d2916edc4941bb4c24e33189626ec11d9ffe99718a056",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "luna_api_vec_cplx_modulus",
+      "size": 340,
+      "sha256": "7de57c463b8dc7db960e630cd12867c9124e5f3e04ce86204656de797a94db8b",
+      "source": "modules/luna/cmd/luna_vector_cmd.c"
+    },
+    {
+      "name": "nnblas_api_split_cnn",
+      "size": 1444,
+      "sha256": "219f26da4e705c25f0f4afa1ebe80f02ac09a896d77700b136a560e829e00345",
+      "source": "libnnblas.a(nnblas_conv_luna.o)"
+    },
+    {
+      "name": "luna_api_gpdma_wait_r9",
+      "size": 72,
+      "sha256": "b48fa19460c55b7305521d0b15378d0607b2ad8dc33866e4dda3cf8e62d94476",
+      "source": "libnnblas.a(nnblas_memcpy.o)"
+    },
+    {
+      "name": "luna_api_gpdma_start_r9",
+      "size": 440,
+      "sha256": "caa9fe886cfd791f875c2444f7189178889fca3c3768809fde0d8ee99e9cb5db",
+      "source": "libnnblas.a(nnblas_memcpy.o)"
+    },
+    {
+      "name": "kernel_vec_add_b2b",
+      "size": 220,
+      "sha256": "3cb0d503fabf1dbccc79f5910250b4b9ce59813a71e9315f1e10cb798fb66d9f",
+      "source": "libnnblas.a(nlang_axpy.o)"
+    },
+    {
+      "name": "kernel_2dmemcpy_inv_b2b_ss",
+      "size": 176,
+      "sha256": "02adedf521d7825f7bd451281bb7dda068dde55ee3c992b3522c9a2b4c284bde",
+      "source": "libnnblas.a(nlang_concat.o)"
+    },
+    {
+      "name": "kernel_depthwise_q7_int8_opt0_struct",
+      "size": 4720,
+      "sha256": "5a5a1d79011a68fa7b15bd85280be4c701e3334a93fade6f44becc4cb1ef6042",
+      "source": "libnnblas.a(nlang_depthwise.o)"
+    },
+    {
+      "name": "simple_vector_div_w2w_struct",
+      "size": 1876,
+      "sha256": "508440d08dd2025768ab801342e77f33d72a9e8ed9bd17164534a4490af9abb9",
+      "source": "libnnblas.a(nlang_div.o)"
+    },
+    {
+      "name": "kernel_matrixmul_split_b2b_share_bias",
+      "size": 1092,
+      "sha256": "40f093bc644b58efea6756fc2f362a791831cd8d0f0f558369a312aba3009d9b",
+      "source": "libnnblas.a(nlang_matrixmul_bias.o)"
+    },
+    {
+      "name": "kernel_meanpooling_q7_int8_noset_opt0_struct",
+      "size": 4552,
+      "sha256": "e10addb8eb2671127b38f9588a432af06eb9b6e9cf71f3fdce2f990746bf9f65",
+      "source": "libnnblas.a(nlang_meanpooling.o)"
+    },
+    {
+      "name": "simple_memset32",
+      "size": 104,
+      "sha256": "f14b0a1b0f85fdc693ba3f4c5bb9563b21cd96f6d4080083e44cfc55eee1f900",
+      "source": "libnnblas.a(nlang_misc.o)"
+    },
+    {
+      "name": "simple_memcpy",
+      "size": 144,
+      "sha256": "3bec45eb6ce64d954ee8222c3793b32ca7cb98e9774bea7d20866ae569765185",
+      "source": "libnnblas.a(nlang_misc.o)"
+    },
+    {
+      "name": "simple_memcpy_psram2sharem",
+      "size": 136,
+      "sha256": "71710c246f05c5dd5b3567cfb3e28448bd98e1d080fb473837d6d3d1536d87ae",
+      "source": "libnnblas.a(nlang_misc.o)"
+    },
+    {
+      "name": "kernel_vec_scale_b2b",
+      "size": 216,
+      "sha256": "b1f8dce0d520249aebde05116c86a83faa54071a6f3d142c5d7d809f8dc316de",
+      "source": "libnnblas.a(nlang_scale.o)"
+    },
+    {
+      "name": "kernel_vec_scale_w2b",
+      "size": 204,
+      "sha256": "3ff9b7d044cba8693d3bc41bd3626ebd12bdbc5492db7f7ab6d8d3a82de0fcb5",
+      "source": "libnnblas.a(nlang_scale.o)"
+    },
+    {
+      "name": "kernel_slice_3d_b2b_sp",
+      "size": 208,
+      "sha256": "f3c331408bf832ca227a6c0b96c0b878bea70b6394272d369bd6d720a4b76a78",
+      "source": "libnnblas.a(nlang_slice.o)"
+    },
+    {
+      "name": "kernel_vector_sum_b2w_struct",
+      "size": 756,
+      "sha256": "e61b8a3f5746110582ddc0409b45166881ec4dd2bb709109242a2803dedd49b6",
+      "source": "libnnblas.a(nlang_sum.o)"
+    },
+    {
+      "name": "luna_fft_cmd_inverse_final_scale",
+      "size": 1472,
+      "sha256": "0a68fe8106e30f993fc092d33b81dcfc6df79949aafc01e4fa23d39c77970206",
+      "source": "libraries/1mic_call/lib/libluna.a(luna_fft_cmd.o)"
+    }
+  ],
+  "tests": [
+    "test_backend",
+    "test_backend_sanitized",
+    "test_cnn",
+    "test_cnn_cache_dma",
+    "test_dma",
+    "test_fft",
+    "test_fused",
+    "test_matrix",
+    "test_misc",
+    "test_nnblas_cnn",
+    "test_nnblas_math",
+    "test_numeric_safety",
+    "test_vectors",
+    "test_production",
+    "production operators [ASan/UBSan]"
+  ],
+  "latency": "functional; not hardware calibrated"
 }
