@@ -1,0 +1,26 @@
+stages:
+  - build
+
+build_lisem_ci:
+  stage: build
+  image: ubuntu:24.04
+  script:
+    - apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update
+    - apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 install -y --no-install-recommends ca-certificates curl python3 tar
+    - mkdir -p work/Lisem/runtime/bin work/Lisem/runtime/lib
+    - curl -fL --retry 3 --connect-timeout 15 --max-time 300 "https://github.com/maosuyun2009/Lisem/releases/download/ci-venusa-luna-74531d99-r1/Lisem-ci-linux-x86_64.tar.gz" -o work/original.tar.gz
+    - tar -xzf work/original.tar.gz -C work
+    - qemu="$(find work -type f -name qemu-system-riscv32 -print -quit)"
+    - test -n "$qemu"
+    - python3 tools/patch_venusa_luna_cnn.py "$qemu"
+    - mkdir -p work/Lisem/runtime/bin
+    - cp "$qemu" work/Lisem/runtime/bin/qemu-system-riscv32
+    - chmod +x work/Lisem/runtime/bin/qemu-system-riscv32
+    - cp -a "$(dirname "$qemu")/../lib/." work/Lisem/runtime/lib/ 2>/dev/null || true
+    - tar -czf Lisem-ci-linux-x86_64.tar.gz -C work Lisem
+    - sha256sum Lisem-ci-linux-x86_64.tar.gz
+  artifacts:
+    name: lisem-ci-$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+    expire_in: 30 days
+    paths:
+      - Lisem-ci-linux-x86_64.tar.gz
